@@ -1,1 +1,0 @@
-/usr/bin/c++   -g    CMakeFiles/features_slic.dir/src/features_slic.cpp.o  -o features_slic -rdynamic libVigraImpex.a /usr/local/lib/libmlpack.so -Wl,-rpath,/usr/local/lib 

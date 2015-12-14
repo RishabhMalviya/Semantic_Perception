@@ -1,1 +1,0 @@
-/usr/bin/c++   -g    CMakeFiles/logistic.dir/src/logistic.cpp.o  -o logistic -rdynamic libVigraImpex.a /usr/local/lib/libmlpack.so -llapack -lf77blas -latlas -lf77blas -latlas -Wl,-rpath,/usr/local/lib 

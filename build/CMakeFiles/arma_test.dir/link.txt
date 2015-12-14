@@ -1,1 +1,0 @@
-/usr/bin/c++   -g    CMakeFiles/arma_test.dir/src/arma_test.cpp.o  -o arma_test -rdynamic -larmadillo /usr/local/lib/libmlpack.so -Wl,-rpath,/usr/local/lib 

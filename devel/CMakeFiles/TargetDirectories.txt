@@ -1,4 +1,0 @@
-/home/revinci/code/workspaces/qt_ws/Semantic_Perception/devel/CMakeFiles/VigraImpex.dir
-/home/revinci/code/workspaces/qt_ws/Semantic_Perception/devel/CMakeFiles/arma_test.dir
-/home/revinci/code/workspaces/qt_ws/Semantic_Perception/devel/CMakeFiles/features_slic.dir
-/home/revinci/code/workspaces/qt_ws/Semantic_Perception/devel/CMakeFiles/slic_test.dir
