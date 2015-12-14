@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/revinci/code/workspaces/qt_ws/Semantic_Perception/src/features_slic.cpp
+iostream
+-
+cmath
+-
+string
+-
+vigra/multi_array.hxx
+-
+vigra/stdimagefunctions.hxx
+-
+vigra/multi_convolution.hxx
+-
+vigra/multi_watersheds.hxx
+-
+vigra/impex.hxx
+-
+vigra/slic.hxx
+-
+vigra/colorconversions.hxx
+-
+vigra/inspectimage.hxx
+-
+vigra/symmetry.hxx
+-
+vigra/convolution.hxx
+-
+vigra/localminmax.hxx
+-
+vigra/cornerdetection.hxx
+-
+vigra/boundarytensor.hxx
+-
+vigra/noise_normalization.hxx
+-
+mlpack/core.hpp
+-
+

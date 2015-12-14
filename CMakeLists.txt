@@ -32,6 +32,12 @@ target_link_libraries(features_slic
     ${MLPack}
 )
 
+add_executable(GT_SLICLabels_extraction src/GT_SLICLabels_extraction.cpp)
+target_link_libraries(GT_SLICLabels_extraction
+    VigraImpex
+    ${MLPack}
+)
+
 #add_executable(arma_test src/arma_test.cpp)
 #target_link_libraries(arma_test
 #    ${ARMADILLO_LIBRARIES}
@@ -51,11 +57,11 @@ target_link_libraries(features_slic
 #)
 
 
-add_executable(slic_test src/slic_test.cpp)
-target_link_libraries(slic_test
-    VigraImpex
-    ${MLPack}
-)
+#add_executable(slic_test src/slic_test.cpp)
+#target_link_libraries(slic_test
+#    VigraImpex
+#    ${MLPack}
+#)
 
 #add_executable(seeded_test src/seeded_test.cpp)
 #target_link_libraries(seeded_test

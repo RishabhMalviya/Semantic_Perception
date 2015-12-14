@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/watershed_test.dir/src/watershed_test.cpp.o  -o watershed_test -rdynamic libVigraImpex.a 

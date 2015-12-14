@@ -1,0 +1,3 @@
+/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/GT_SLICLabels_extraction.dir
+/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/VigraImpex.dir
+/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/features_slic.dir

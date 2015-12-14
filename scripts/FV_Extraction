@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for num in {0000..6180..20}
+do
+	./build/features_slic $num
+done
