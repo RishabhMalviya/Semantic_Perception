@@ -2,30 +2,34 @@ project(Semantic_Perception)
 cmake_minimum_required(VERSION 2.8)
 
 
-
-#Vigra Headers
+#LIBRARIES FRO LINKING
+#Vigra
 include_directories(
     include
 )
 file(GLOB_RECURSE VigraImpex include/impex/*)
 add_library(VigraImpex ${VigraImpex})
 
-#mlpack Headers
-#add_library(MLPack SHARED IMPORTED /usr/loca/lib/libmlpack.so)
+#mlpack
 find_library(MLPack NAMES libmlpack.so PATHS /usr/local/lib)
 
-#LibXml2 Headers
+#LibXml2
 find_package(LibXml2 REQUIRED)
 
-#Armadillo Headedrs
+#Armadillo
 find_package(Armadillo REQUIRED)
 include_directories(${ARMADILLO_INCLUDE_DIRS})
 
-#Boost Headers
+#BLAS and LAPACK
+find_package(BLAS REQUIRED)
+find_package(LAPACK REQUIRED)
+
+#Boost
 find_package(Boost 1.54.0 REQUIRED)
 
 
 
+#EXECUTABLES
 add_executable(features_slic src/features_slic.cpp)
 target_link_libraries(features_slic
     VigraImpex
@@ -38,41 +42,18 @@ target_link_libraries(GT_SLICLabels_extraction
     ${MLPack}
 )
 
-#add_executable(arma_test src/arma_test.cpp)
-#target_link_libraries(arma_test
-#    ${ARMADILLO_LIBRARIES}
-#    ${MLPack}
-#)
+add_executable(nbc src/nbc.cpp)
+target_link_libraries(nbc
+    VigraImpex
+    ${MLPack}
+    ${LAPACK_LIBRARIES}
+    ${BLAS_LIBRARIES}
+)
 
-
-#add_executable(io_test src/io_test.cpp)
-#target_link_libraries(io_test
-#    VigraImpex
-#)
-
-##ONLY SEGMENTATION
-#add_executable(watershed_test src/watershed_test.cpp)
-#target_link_libraries(watershed_test
-#    VigraImpex
-#)
-
-
-#add_executable(slic_test src/slic_test.cpp)
-#target_link_libraries(slic_test
+#add_executable(logistic src/logistic.cpp)
+#target_link_libraries(logistic
 #    VigraImpex
 #    ${MLPack}
-#)
-
-#add_executable(seeded_test src/seeded_test.cpp)
-#target_link_libraries(seeded_test
-#    VigraImpex
-#)
-
-#ONLY FEATURE EXTRACTION
-
-
-#COMBINED
-#add_executable(features_slic src/features_slic.cpp)
-#target_link_libraries(features_slic
-#    VigraImpex
+#    ${LAPACK_LIBRARIES}
+#    ${BLAS_LIBRARIES}
 #)

@@ -20,6 +20,15 @@ ARMADILLO_INCLUDE_DIR:PATH=/usr/include
 //Path to a library.
 ARMADILLO_LIBRARY:FILEPATH=/usr/lib/libarmadillo.so
 
+//Path to a library.
+BLAS_atlas_LIBRARY:FILEPATH=/usr/lib/libatlas.so
+
+//Path to a library.
+BLAS_f77blas_LIBRARY:FILEPATH=/usr/lib/libf77blas.so
+
+//Path to a library.
+BLAS_goto2_LIBRARY:FILEPATH=BLAS_goto2_LIBRARY-NOTFOUND
+
 //The directory containing a CMake configuration file for Boost.
 Boost_DIR:PATH=Boost_DIR-NOTFOUND
 
@@ -182,6 +191,18 @@ CMAKE_USE_RELATIVE_PATHS:BOOL=OFF
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
+//Path to a library.
+LAPACK_Accelerate_LIBRARY:FILEPATH=LAPACK_Accelerate_LIBRARY-NOTFOUND
+
+//Path to a library.
+LAPACK_goto2_LIBRARY:FILEPATH=LAPACK_goto2_LIBRARY-NOTFOUND
+
+//Path to a library.
+LAPACK_lapack_LIBRARY:FILEPATH=/usr/lib/liblapack.so
+
+//Path to a library.
+LAPACK_vecLib_LIBRARY:FILEPATH=LAPACK_vecLib_LIBRARY-NOTFOUND
+
 //Path to a file.
 LIBXML2_INCLUDE_DIR:PATH=/usr/include/libxml2
 
@@ -218,6 +239,12 @@ Semantic_Perception_SOURCE_DIR:STATIC=/home/revinci/code/workspaces/qt_ws/Semant
 //Dependencies for target
 VigraImpex_LIB_DEPENDS:STATIC=
 
+//The directory containing a CMake configuration file for blas.
+blas_DIR:PATH=blas_DIR-NOTFOUND
+
+//The directory containing a CMake configuration file for lapack.
+lapack_DIR:PATH=lapack_DIR-NOTFOUND
+
 //The directory containing a CMake configuration file for mlpack.
 mlpack_DIR:PATH=mlpack_DIR-NOTFOUND
 
@@ -230,6 +257,16 @@ mlpack_DIR:PATH=mlpack_DIR-NOTFOUND
 ARMADILLO_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ARMADILLO_LIBRARY
 ARMADILLO_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: BLAS_atlas_LIBRARY
+BLAS_atlas_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: BLAS_f77blas_LIBRARY
+BLAS_f77blas_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: BLAS_f77blas_atlas_WORKS
+BLAS_f77blas_atlas_WORKS-ADVANCED:INTERNAL=1
+//Have function dgemm_
+BLAS_f77blas_atlas_WORKS:INTERNAL=1
+//ADVANCED property for variable: BLAS_goto2_LIBRARY
+BLAS_goto2_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: Boost_DIR
 Boost_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: Boost_INCLUDE_DIR
@@ -300,6 +337,14 @@ CMAKE_EXPORT_COMPILE_COMMANDS-ADVANCED:INTERNAL=1
 CMAKE_GENERATOR:INTERNAL=Unix Makefiles
 //Name of generator toolset.
 CMAKE_GENERATOR_TOOLSET:INTERNAL=
+//Have symbol pthread_create
+CMAKE_HAVE_LIBC_CREATE:INTERNAL=
+//Have library pthreads
+CMAKE_HAVE_PTHREADS_CREATE:INTERNAL=
+//Have library pthread
+CMAKE_HAVE_PTHREAD_CREATE:INTERNAL=1
+//Have include pthread.h
+CMAKE_HAVE_PTHREAD_H:INTERNAL=1
 //Start directory with the top level CMakeLists.txt file for this
 // project
 CMAKE_HOME_DIRECTORY:INTERNAL=/home/revinci/code/workspaces/qt_ws/Semantic_Perception
@@ -367,6 +412,20 @@ CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 FIND_PACKAGE_MESSAGE_DETAILS_Armadillo:INTERNAL=[/usr/lib/libarmadillo.so][/usr/include][v4.200.0()]
 //Details about finding LibXml2
 FIND_PACKAGE_MESSAGE_DETAILS_LibXml2:INTERNAL=[/usr/lib/x86_64-linux-gnu/libxml2.so][/usr/include/libxml2][v2.9.1()]
+//Details about finding Threads
+FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
+//ADVANCED property for variable: LAPACK_Accelerate_LIBRARY
+LAPACK_Accelerate_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: LAPACK_goto2_LIBRARY
+LAPACK_goto2_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: LAPACK_lapack_LIBRARY
+LAPACK_lapack_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: LAPACK_lapack_WORKS
+LAPACK_lapack_WORKS-ADVANCED:INTERNAL=1
+//Have function cheev_
+LAPACK_lapack_WORKS:INTERNAL=1
+//ADVANCED property for variable: LAPACK_vecLib_LIBRARY
+LAPACK_vecLib_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: LIBXML2_INCLUDE_DIR
 LIBXML2_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: LIBXML2_LIBRARIES

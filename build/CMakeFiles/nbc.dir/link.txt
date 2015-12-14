@@ -1,0 +1,1 @@
+/usr/bin/c++   -g    CMakeFiles/nbc.dir/src/nbc.cpp.o  -o nbc -rdynamic libVigraImpex.a /usr/local/lib/libmlpack.so -llapack -lf77blas -latlas -lf77blas -latlas -Wl,-rpath,/usr/local/lib 

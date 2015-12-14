@@ -261,3 +261,71 @@ Parsed CXX implicit link information from above output:
   implicit fwks: []
 
 
+Determining if the function dgemm_ exists passed with the following output:
+Change Dir: /home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1861680804/fast"
+make[1]: Entering directory `/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1861680804.dir/build.make CMakeFiles/cmTryCompileExec1861680804.dir/build
+make[2]: Entering directory `/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1861680804.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=dgemm_   -o CMakeFiles/cmTryCompileExec1861680804.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec1861680804
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1861680804.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=dgemm_    CMakeFiles/cmTryCompileExec1861680804.dir/CheckFunctionExists.c.o  -o cmTryCompileExec1861680804 -rdynamic -lf77blas -latlas 
+make[2]: Leaving directory `/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/CMakeTmp'
+make[1]: Leaving directory `/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/CMakeTmp'
+
+
+Determining if files pthread.h exist passed with the following output:
+Change Dir: /home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec725151028/fast"
+make[1]: Entering directory `/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTryCompileExec725151028.dir/build.make CMakeFiles/cmTryCompileExec725151028.dir/build
+make[2]: Entering directory `/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec725151028.dir/CheckIncludeFiles.c.o
+/usr/bin/cc    -o CMakeFiles/cmTryCompileExec725151028.dir/CheckIncludeFiles.c.o   -c /home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+Linking C executable cmTryCompileExec725151028
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec725151028.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTryCompileExec725151028.dir/CheckIncludeFiles.c.o  -o cmTryCompileExec725151028 -rdynamic 
+make[2]: Leaving directory `/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/CMakeTmp'
+make[1]: Leaving directory `/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function pthread_create exists in the pthread passed with the following output:
+Change Dir: /home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3254186434/fast"
+make[1]: Entering directory `/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3254186434.dir/build.make CMakeFiles/cmTryCompileExec3254186434.dir/build
+make[2]: Entering directory `/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3254186434.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec3254186434.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec3254186434
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3254186434.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTryCompileExec3254186434.dir/CheckFunctionExists.c.o  -o cmTryCompileExec3254186434 -rdynamic -lpthread 
+make[2]: Leaving directory `/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/CMakeTmp'
+make[1]: Leaving directory `/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function cheev_ exists passed with the following output:
+Change Dir: /home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec2945814998/fast"
+make[1]: Entering directory `/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2945814998.dir/build.make CMakeFiles/cmTryCompileExec2945814998.dir/build
+make[2]: Entering directory `/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2945814998.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=cheev_   -o CMakeFiles/cmTryCompileExec2945814998.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec2945814998
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2945814998.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=cheev_    CMakeFiles/cmTryCompileExec2945814998.dir/CheckFunctionExists.c.o  -o cmTryCompileExec2945814998 -rdynamic -llapack -lf77blas -latlas 
+make[2]: Leaving directory `/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/CMakeTmp'
+make[1]: Leaving directory `/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles/CMakeTmp'
+
+

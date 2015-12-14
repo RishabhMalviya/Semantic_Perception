@@ -140,6 +140,19 @@ features_slic/fast:
 	$(MAKE) -f CMakeFiles/features_slic.dir/build.make CMakeFiles/features_slic.dir/build
 .PHONY : features_slic/fast
 
+#=============================================================================
+# Target rules for targets named nbc
+
+# Build rule for target.
+nbc: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 nbc
+.PHONY : nbc
+
+# fast build rule for target.
+nbc/fast:
+	$(MAKE) -f CMakeFiles/nbc.dir/build.make CMakeFiles/nbc.dir/build
+.PHONY : nbc/fast
+
 include/impex/bmp.o: include/impex/bmp.cxx.o
 .PHONY : include/impex/bmp.o
 
@@ -644,6 +657,30 @@ src/features_slic.cpp.s:
 	$(MAKE) -f CMakeFiles/features_slic.dir/build.make CMakeFiles/features_slic.dir/src/features_slic.cpp.s
 .PHONY : src/features_slic.cpp.s
 
+src/nbc.o: src/nbc.cpp.o
+.PHONY : src/nbc.o
+
+# target to build an object file
+src/nbc.cpp.o:
+	$(MAKE) -f CMakeFiles/nbc.dir/build.make CMakeFiles/nbc.dir/src/nbc.cpp.o
+.PHONY : src/nbc.cpp.o
+
+src/nbc.i: src/nbc.cpp.i
+.PHONY : src/nbc.i
+
+# target to preprocess a source file
+src/nbc.cpp.i:
+	$(MAKE) -f CMakeFiles/nbc.dir/build.make CMakeFiles/nbc.dir/src/nbc.cpp.i
+.PHONY : src/nbc.cpp.i
+
+src/nbc.s: src/nbc.cpp.s
+.PHONY : src/nbc.s
+
+# target to generate assembly for a file
+src/nbc.cpp.s:
+	$(MAKE) -f CMakeFiles/nbc.dir/build.make CMakeFiles/nbc.dir/src/nbc.cpp.s
+.PHONY : src/nbc.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -654,6 +691,7 @@ help:
 	@echo "... VigraImpex"
 	@echo "... edit_cache"
 	@echo "... features_slic"
+	@echo "... nbc"
 	@echo "... rebuild_cache"
 	@echo "... include/impex/bmp.o"
 	@echo "... include/impex/bmp.i"
@@ -718,6 +756,9 @@ help:
 	@echo "... src/features_slic.o"
 	@echo "... src/features_slic.i"
 	@echo "... src/features_slic.s"
+	@echo "... src/nbc.o"
+	@echo "... src/nbc.i"
+	@echo "... src/nbc.s"
 .PHONY : help
 
 

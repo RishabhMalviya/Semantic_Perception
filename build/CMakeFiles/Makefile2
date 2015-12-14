@@ -161,6 +161,41 @@ clean: CMakeFiles/features_slic.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/nbc.dir
+
+# All Build rule for target.
+CMakeFiles/nbc.dir/all: CMakeFiles/VigraImpex.dir/all
+	$(MAKE) -f CMakeFiles/nbc.dir/build.make CMakeFiles/nbc.dir/depend
+	$(MAKE) -f CMakeFiles/nbc.dir/build.make CMakeFiles/nbc.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles  22
+	@echo "Built target nbc"
+.PHONY : CMakeFiles/nbc.dir/all
+
+# Include target in all.
+all: CMakeFiles/nbc.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/nbc.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles 20
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/nbc.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/CMakeFiles 0
+.PHONY : CMakeFiles/nbc.dir/rule
+
+# Convenience name for target.
+nbc: CMakeFiles/nbc.dir/rule
+.PHONY : nbc
+
+# clean rule for target.
+CMakeFiles/nbc.dir/clean:
+	$(MAKE) -f CMakeFiles/nbc.dir/build.make CMakeFiles/nbc.dir/clean
+.PHONY : CMakeFiles/nbc.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/nbc.dir/clean
+.PHONY : clean
+
+#=============================================================================
 # Special targets to cleanup operation of make.
 
 # Special rule to run CMake to check the build system integrity.

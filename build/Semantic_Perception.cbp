@@ -113,6 +113,38 @@
             <DistClean command="/usr/bin/make -f &quot;/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/Makefile&quot;  VERBOSE=1 clean" />
          </MakeCommands>
       </Target>
+      <Target title="nbc">
+         <Option output="/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/nbc" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/home/revinci/code/workspaces/qt_ws/Semantic_Perception/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/Makefile&quot;  VERBOSE=1 nbc" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="nbc/fast">
+         <Option output="/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/nbc" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/home/revinci/code/workspaces/qt_ws/Semantic_Perception/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/Makefile&quot;  VERBOSE=1 nbc/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
       <Target title="rebuild_cache">
          <Option working_dir="/home/revinci/code/workspaces/qt_ws/Semantic_Perception/build" />
          <Option type="4" />
@@ -165,6 +197,8 @@
       <Unit filename="/home/revinci/code/workspaces/qt_ws/Semantic_Perception/src/GT_SLICLabels_extraction.cpp">
       </Unit>
       <Unit filename="/home/revinci/code/workspaces/qt_ws/Semantic_Perception/src/features_slic.cpp">
+      </Unit>
+      <Unit filename="/home/revinci/code/workspaces/qt_ws/Semantic_Perception/src/nbc.cpp">
       </Unit>
       <Unit filename="/home/revinci/code/workspaces/qt_ws/Semantic_Perception/include/impex/CMakeCache.txt">
       </Unit>
