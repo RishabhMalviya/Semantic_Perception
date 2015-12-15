@@ -1,4 +1,4 @@
-	string trainingImages[37] = {
+	std::string trainingImages[37] = {
 								 "0080",
 								 "0160",
 								 "0180",
@@ -36,9 +36,9 @@
 								 "5900",
 								 "6100",
 								 "6120"
-								}
+								};
 
-	string testingImages[13] = {
+	std::string testingImages[13] = {
 							 	 "2300",
 								 "2340",
 								 "2420",
@@ -52,4 +52,4 @@
 								 "4100",
 								 "4200",
 								 "4260"
-							   }
+							   };

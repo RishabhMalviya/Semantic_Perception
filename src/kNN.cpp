@@ -7,7 +7,6 @@
 
 using namespace mlpack;
 
-static const char testNumber[] = "1";
 
 double colSum(arma::vec input){
   double sum=0.0;
@@ -71,64 +70,65 @@ arma::vec inverseDistancePredictor_Testing(arma::vec Distances, arma::Col<std::s
 }
 
 
+static const char testNumber[] = "4";
+
 int main(int argc, char** argv){
     //Enumerate Training and Test Image Numbers
-        std::string trainingImages[37] = {
-                                                         "0080",
-                                                         "0160",
-                                                         "0180",
-                                                         "0200",
-                                                         "0580",
-                                                         "0700",
-                                                         "0760",
-                                                         "0800",
-                                                         "0820",
-                                                         "1020",
-                                                         "1060",
-                                                         "1080",
-                                                         "1100",
-                                                         "1160",
-                                                         "1220",
-                                                         "1320",
-                                                         "1440",
-                                                         "1480",
-                                                         "1580",
-                                                         "1600",
-                                                         "1660",
-                                                         "1720",
-                                                         "1940",
-                                                         "2280",
-                                                         "2300",
-                                                         "2340",
-                                                         "2420",
-                                                         "2580",
-                                                         "2600",
-                                                         "2860",
-                                                         "3140",
-                                                         "3220",
-                                                         "3700",
-                                                         "3920",
-                                                         "4100",
-                                                         "4200",
-                                                         "4260"
-                                                        };
+  std::string trainingImages[37] = {
+                                                           "4280",
+                                                           "4720",
+                                                           "4740",
+                                                           "4780",
+                                                           "5000",
+                                                           "5220",
+                                                           "5440",
+                                                           "5600",
+                                                           "5640",
+                                                           "5660",
+                                                           "5900",
+                                                           "6100",
+                                                           "6120",
+                                                           "1160",
+                                                           "1220",
+                                                           "1320",
+                                                           "1440",
+                                                           "1480",
+                                                           "1580",
+                                                           "1600",
+                                                           "1660",
+                                                           "1720",
+                                                           "1940",
+                                                           "2280",
+                                                           "2300",
+                                                           "2340",
+                                                           "2420",
+                                                           "2580",
+                                                           "2600",
+                                                           "2860",
+                                                           "3140",
+                                                           "3220",
+                                                           "3700",
+                                                           "3920",
+                                                           "4100",
+                                                           "4200",
+                                                           "4260"
+                                                          };
 
-            std::string testingImages[13] = {
-                                                        "4280",
-                                                        "4720",
-                                                        "4740",
-                                                        "4780",
-                                                        "5000",
-                                                        "5220",
-                                                        "5440",
-                                                        "5600",
-                                                        "5640",
-                                                        "5660",
-                                                        "5900",
-                                                        "6100",
-                                                        "6120"
-                                                   };
-
+  std::string testingImages[13] = {
+                                                           "0080",
+                                                           "0160",
+                                                           "0180",
+                                                           "0200",
+                                                           "0580",
+                                                           "0700",
+                                                           "0760",
+                                                           "0800",
+                                                           "0820",
+                                                           "1020",
+                                                           "1060",
+                                                           "1080",
+                                                           "1100",
+                                                     };
 
     //Import Training FVs and GTVs
         //trainingFVs_combined
@@ -187,13 +187,10 @@ int main(int argc, char** argv){
                   Results(y,x) = trainingGTVs(Results(y,x));
                 }
             }
-          mlpack::data::Save("../results.csv",Results,true);
-          mlpack::data::Save("../distances.csv",Distances,true);
         //Determine final predictions for query points using all neighbours (weighted by inverse distances)
           for(int i=0; i<Results.n_cols; ++i){
               Results(0,i) = inverseDistancePredictor_Training(Distances.col(i),Results.col(i),11);
             }
-          mlpack::data::Save("../results_weighted_average.csv",Results,true);
         //Create confusion matrix
           arma::mat confusionMatrix(11,11); confusionMatrix.fill(0.0);
           for(int i=0; i<Results.n_cols; ++i){
@@ -240,8 +237,6 @@ int main(int argc, char** argv){
                         Results_(y,x) = trainingGTVs(Results_(y,x));
                       }
                   }
-                mlpack::data::Save("../distances.csv",Distances_,true);
-                mlpack::data::Save("../results.csv",Results_,true);
               //Determine Confidence Vectors for Each superpixel
                 arma::mat finalConfidenceVectors(Results_.n_cols,11);
                 for(int superpixel=0; superpixel<Results_.n_cols; ++superpixel){
