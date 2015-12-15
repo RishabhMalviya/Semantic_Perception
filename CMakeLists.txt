@@ -42,22 +42,6 @@ target_link_libraries(GT_SLICLabels_extraction
     ${MLPack}
 )
 
-add_executable(nbc src/nbc.cpp)
-target_link_libraries(nbc
-    VigraImpex
-    ${MLPack}
-    ${LAPACK_LIBRARIES}
-    ${BLAS_LIBRARIES}
-)
-
-add_executable(stump src/decision_stump.cpp)
-target_link_libraries(stump
-    VigraImpex
-    ${MLPack}
-    ${LAPACK_LIBRARIES}
-    ${BLAS_LIBRARIES}
-)
-
 add_executable(kNN src/kNN.cpp)
 target_link_libraries(kNN
     VigraImpex
@@ -66,10 +50,3 @@ target_link_libraries(kNN
     ${BLAS_LIBRARIES}
 )
 
-#add_executable(create_confusionMatrices src/create_confusionMatrices.cpp)
-#target_link_libraries(create_confusionMatrices
-#    VigraImpex
-#    ${MLPack}
-#    ${LAPACK_LIBRARIES}
-#    ${BLAS_LIBRARIES}
-#)
