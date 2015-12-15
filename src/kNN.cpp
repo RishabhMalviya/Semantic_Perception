@@ -129,7 +129,6 @@ int main(int argc, char** argv){
                                                            "1080",
                                                            "1100",
                                                      };
-
     //Import Training FVs and GTVs
         //trainingFVs_combined
         arma::mat trainingFVs_combined, trainingFVs[37];
@@ -198,7 +197,7 @@ int main(int argc, char** argv){
             }
         //Export Confusion Matrix
           std::stringstream confMat_file;
-          confMat_file << "../data/Predictions_" << testNumber << "/confusionMatrix.csv";
+          confMat_file << "../data/Predictions_" << testNumber << "/intermediateConfusionMatrix.csv";
           mlpack::data::Save(confMat_file.str().c_str(),confusionMatrix,true);
 
 
@@ -213,7 +212,8 @@ int main(int argc, char** argv){
            */
           for(int x=0; x<condProb.n_cols; ++x){
               for(int y=0; y<condProb.n_rows; ++y){
-                  condProb(y,x) = confusionMatrix(y,x)/colSum(confusionMatrix.col(x));
+                  if(colSum(confusionMatrix.col(x))==0) condProb(y,x) = 0;
+                  else condProb(y,x) = confusionMatrix(y,x)/colSum(confusionMatrix.col(x));
                 }
             }
           std::stringstream condProb_file;
