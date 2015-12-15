@@ -95,8 +95,9 @@ void LogisticRegression<OptimizerType>::Predict(const arma::mat& predictors,
 {
   // Calculate sigmoid function for each point.  The (1.0 - decisionBoundary)
   // term correctly sets an offset so that floor() returns 0 or 1 correctly.
-  responses = (1.0 / (1.0 + arma::exp(-parameters(0)
-      - predictors.t() * parameters.subvec(1, parameters.n_elem - 1))));
+  responses = arma::floor((1.0 / (1.0 + arma::exp(-parameters(0)
+      - predictors.t() * parameters.subvec(1, parameters.n_elem - 1))))
+      + (1.0 - decisionBoundary));
 }
 
 template <template<typename> class OptimizerType>

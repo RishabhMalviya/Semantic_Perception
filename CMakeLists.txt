@@ -50,8 +50,24 @@ target_link_libraries(nbc
     ${BLAS_LIBRARIES}
 )
 
-#add_executable(logistic src/logistic.cpp)
-#target_link_libraries(logistic
+add_executable(stump src/decision_stump.cpp)
+target_link_libraries(stump
+    VigraImpex
+    ${MLPack}
+    ${LAPACK_LIBRARIES}
+    ${BLAS_LIBRARIES}
+)
+
+add_executable(kNN src/kNN.cpp)
+target_link_libraries(kNN
+    VigraImpex
+    ${MLPack}
+    ${LAPACK_LIBRARIES}
+    ${BLAS_LIBRARIES}
+)
+
+#add_executable(create_confusionMatrices src/create_confusionMatrices.cpp)
+#target_link_libraries(create_confusionMatrices
 #    VigraImpex
 #    ${MLPack}
 #    ${LAPACK_LIBRARIES}
