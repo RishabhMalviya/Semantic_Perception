@@ -19,9 +19,9 @@ The first task is to segment all the images into superpixels and then extract fe
 ## 2. GT_SLICLabels_extraction (Extract Ground Truth Values and SLIc Labels)
 This file extracts the ground truth labels (the desired outputs) for each feature vector using the labeled images. These are determined by taking the most frequent pixel-wise label occuring in the superpixel corresponding to the feature vector. The output of this step is stored in these folders:
 
-  a) *data/GT_vectors* - Each file in this folder lists the ground truth values for each superpixel in the form of a column vector - one vector per image, and one superpixel per entry.
-  b) *data/SLICLabel_vectors* - This contains the labels of the superpixels (which are numbers). The reason I had to output this explicitly is because of a small glitch in the VIGRA SLIC segmentation implementation.
-  c) *data/SLICSegmentation_arrays* - This contains arrays of the size of the images, wherein each pixel is labeled with the label of the superpixel it belongs to.
+  - *data/GT_vectors* - Each file in this folder lists the ground truth values for each superpixel in the form of a column vector - one vector per image, and one superpixel per entry.
+  - *data/SLICLabel_vectors* - This contains the labels of the superpixels (which are numbers). The reason I had to output this explicitly is because of a small glitch in the VIGRA SLIC segmentation implementation.
+  - *data/SLICSegmentation_arrays* - This contains arrays of the size of the images, wherein each pixel is labeled with the label of the superpixel it belongs to.
 
 
 ## 3. kNN (Use k Nearest Neighbours to Assign Labels to Feature Vectors)
