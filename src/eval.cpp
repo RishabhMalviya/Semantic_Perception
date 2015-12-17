@@ -338,38 +338,49 @@ int main(int argc, char** argv){
             }
           accuracy = (accuracy*100)/(640*512);
           std::cout << "Accuracy: " << accuracy << "%" << std::endl;
-/*
+
         //Precision
-          arma::mat Precision(0,confusionMatrix.n_cols); Precision.fill(0.0);
+          arma::mat Precision(1,confusionMatrix.n_cols); Precision.fill(0.0);
           for(unsigned int i=0; i<Precision.n_cols; ++i){
+              Precision(0,i) = confusionMatrix(i,i);
+              double denominator = 0.0;
               for(unsigned int j=0; j<confusionMatrix.n_cols; ++j){
-                  Precision(0,i) += confusionMatrix(i,j);
+                  denominator += confusionMatrix(i,j);
                 }
+              if(denominator!=0.0) Precision(0,i) /= denominator;
+              else Precision(0,i) = 0.0;
             }
           std::stringstream precision_file;
           precision_file << "../data/Predictions_" << argv[1] << "/Performance_Evaluation/Precision.csv";
           mlpack::data::Save(precision_file.str().c_str(),Precision,true);
 
         //Recall
-          arma::mat Recall(0,confusionMatrix.n_cols); Recall.fill(0.0);
+          arma::mat Recall(1,confusionMatrix.n_cols); Recall.fill(0.0);
           for(unsigned int i=0; i<Recall.n_cols; ++i){
+              Recall(0,i) = confusionMatrix(i,i);
+              double denominator = 0.0;
               for(unsigned int j=0; j<confusionMatrix.n_cols; ++j){
-                  Recall(0,i) += confusionMatrix(j,i);
+                  denominator += confusionMatrix(j,i);
                 }
+              if(denominator!=0.0) Recall(0,i) /= denominator;
+              else Recall(0,i) = 0.0;
             }
           std::stringstream recall_file;
           recall_file << "../data/Predictions_" << argv[1] << "/Performance_Evaluation/Recall.csv";
           mlpack::data::Save(recall_file.str().c_str(),Recall,true);
 
         //F1 Score
-          arma::mat F1(0,confusionMatrix.n_cols); F1.fill(0.0);
+          arma::mat F1(1,confusionMatrix.n_cols); F1.fill(0.0);
           for(unsigned int i=0; i<F1.n_cols; ++i){
-              F1(0,i) = (2*Precision(0,i)*Recall(0,i)/(Precision(0,i)+Recall(0,i)));
+              F1(0,i) = 2*Precision(0,i)*Recall(0,i);
+              double denominator = Precision(0,i) + Recall(0,i);
+              if(denominator!=0.0) F1(0,i) /= denominator;
+              else F1(0,i) = 0.0;
             }
-          std::stringstream F1_file;
-          F1_file << "../data/Predictions_" << argv[1] << "/Performance_Evaluation/F1.csv";
-          mlpack::data::Save(F1_file.str().c_str(),F1,true);
-*/
+          std::stringstream f1_file;
+          f1_file << "../data/Predictions_" << argv[1] << "/Performance_Evaluation/F1.csv";
+          mlpack::data::Save(f1_file.str().c_str(),F1,true);
+
 
     return 0;
 }
