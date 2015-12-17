@@ -5,7 +5,7 @@ Semantic Perception internship assignment for CMU 2016 summer internships
 
 
 
-The entire pipeline can be divided into four parts. Each part has a corresponding source file, and the roles of each are explained below:
+The entire pipeline can be divided into four parts. Each part has a corresponding source file, and the roles of each are explained below. Please note that the scripts must be run after *cd*-ing into the */scripts/* folder, and the individual executables must be run after *cd*-ing into the */build/* folder (after running CMake and Make):
 
 
 ## 1. features_slic (Segmentation, Feature Vector Extraction)
