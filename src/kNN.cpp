@@ -73,6 +73,8 @@ arma::vec inverseDistancePredictor_Testing(arma::vec Distances, arma::Col<std::s
 
 
 static const char testNumber[] = "4";
+static const std::size_t TRAIN_NEIGHBORHOOD = 5;
+static const std::size_t TEST_NEIGHBORHOOD = 3;
 
 int main(int argc, char** argv){
     //Enumerate Training and Test Image Numbers
@@ -163,8 +165,6 @@ int main(int argc, char** argv){
         for(int FinalGTVIndex=0;FinalGTVIndex<trainingGTVs.n_rows;++FinalGTVIndex){
             trainingGTVs(FinalGTVIndex) = (std::size_t)trainingGTVs_float(FinalGTVIndex);
           }
-        arma::Row<std::size_t> trainingGTVs_transpose = trainingGTVs.t();
-        mlpack::data::Save("../trainingGTvs.csv",trainingGTVs_transpose,true);
 
     //Import Testing FVs
         arma::mat testingFVs[13];
@@ -180,7 +180,7 @@ int main(int argc, char** argv){
         //Search!
           arma::Mat<std::size_t> Results;
           arma::mat Distances;
-          kNN.Search(5,Results,Distances);
+          kNN.Search(TRAIN_NEIGHBORHOOD,Results,Distances);
         //Make distances easier to work with
           arma::mat divider(Distances.n_rows,Distances.n_cols); divider.fill(100.0);
           Distances = Distances/divider;
@@ -195,7 +195,6 @@ int main(int argc, char** argv){
               Results(0,i) = inverseDistancePredictor_Training(Distances.col(i),Results.col(i),11);
             }
           arma::Row<std::size_t> trainingResults = Results.row(0);
-          mlpack::data::Save("../training_prediction.csv",trainingResults,true);
         //Create confusion matrix
           arma::mat confusionMatrix(11,11); confusionMatrix.fill(0.0);
           for(int i=0; i<Results.n_cols; ++i){
@@ -235,8 +234,8 @@ int main(int argc, char** argv){
               //Search!
                 arma::Mat<std::size_t> Results_;
                 arma::mat Distances_;
-                kNN.Search(1,Results_,Distances_);
-                std::cout << "Completed search for test image: " << testImageNumber+1 << std::endl;
+                kNN.Search(TEST_NEIGHBORHOOD,Results_,Distances_);
+                std::cout << "Nearest neighbor search for test image: " << testImageNumber+1 << " completed." << std::endl;
                 std::cout << "Number of superpixels in image: " << Results_.n_cols << std::endl << std::endl;
               //Make distances easier to work with
                 arma::mat divider(Distances_.n_rows,Distances_.n_cols); divider.fill(100.0);
@@ -247,7 +246,6 @@ int main(int argc, char** argv){
                         Results_(y,x) = trainingGTVs(Results_(y,x));
                       }
                   }
-                mlpack::data::Save("../intermediate_results.csv",Results_,true);
               //Determine Confidence Vectors for Each superpixel
                 arma::mat finalConfidenceVectors(11,Results_.n_cols);
                 for(int superpixel=0; superpixel<Results_.n_cols; ++superpixel){
@@ -256,25 +254,20 @@ int main(int argc, char** argv){
                     for(int i=0; i<11; ++i){
                         finalConfidenceVectors(i,superpixel) = dot(confidenceVector_prediction,condProb.row(i).t());
                       }
-                    finalConfidenceVectors.col(superpixel) = confidenceVector_prediction;
                   }
                 std::stringstream confidenceVectors_view;
-                confidenceVectors_view << "../" << testingImages[testImageNumber] << "_confVects.csv";
+                confidenceVectors_view << "../data/Predictions_" << testNumber << "/FinalConfidenceVectors/" << testingImages[testImageNumber] << "_confVects.csv";
                 mlpack::data::Save(confidenceVectors_view.str().c_str(),finalConfidenceVectors,true);
-/*                std::stringstream condProb_file;
-                condProb_file << "../data/Predictions_" << testNumber << "/FinalConfidenceVectors/" << testingImages[testImageNumber] << "_confVect.csv";
-                mlpack::data::Save(condProb_file.str().c_str(),condProb,true);
-*/
-/*
+
               //Determine final predictions from the maximums in the final confidence vectors
                 arma::Mat<std::size_t> finalPredictions(1,Results_.n_cols);
                 for(int superpixel=0; superpixel<Results_.n_cols; ++superpixel){
-                    finalPredictions(0,superpixel) = maxValueIndex(finalConfidenceVectors.row(superpixel).t());
+                    finalPredictions(0,superpixel) = maxValueIndex(finalConfidenceVectors.col(superpixel));
                   }
                 std::stringstream predictionVector_file;
                 predictionVector_file << "../data/Predictions_" << testNumber << "/FinalPredictionVectors/" << testingImages[testImageNumber] << "_predictionVector.csv";
-                //mlpack::data::Save(predictionVector_file.str().c_str(),finalPredictions,true);
-*/
+                mlpack::data::Save(predictionVector_file.str().c_str(),finalPredictions,true);
+
             }
 
 
