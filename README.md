@@ -5,7 +5,7 @@ Semantic Perception internship assignment for CMU 2016 summer internships
 
 
 
-The entire pipeline can be divided into four parts. Each part has a corresponding source file, and the roles of each are explained below. Please note that the scripts must be run after *cd*-ing into the */scripts/* folder, and the individual executables must be run after *cd*-ing into the */build/* folder (after running CMake and Make):
+The entire pipeline can be divided into four parts. Each part has a corresponding source file, and the roles of each are explained below. Please note that the scripts must be run after cd-ing into the */scripts/* folder, and the individual executables must be run after cd-ing into the */build/* folder (after running CMake and Make):
 
 
 ## 1. features_slic (Segmentation, Feature Vector Extraction)
@@ -25,7 +25,8 @@ This file extracts the ground truth labels (the desired outputs) for each featur
 
 
 ## 3. kNN (k - Nearest Neighbours to Assign Labels to Feature Vectors)
-NOTE: The number of nearest neighbours to consider in the various parts of the algorithm can be varied, though in the following discussion we assume fixed numerical values. 
+NOTE: The number of nearest neighbours to consider in the various parts of the algorithm can be varied, though in the following discussion we assume fixed numerical values.
+
 A particular training-testing division is chosen (37 images training, 13 images testing) and the feature vectors of the superpixels in the training images are used as reference points for the k-NN algorithm. The 5 nearest neighbors of the testing feature vectors are used to determine what their labels should be. One way to proceed is this:
 
 * The label of the feature vector is predicted by assigning scores to all of the possible labels of the 5 nearest neighbours against the inverse distances from those neighbours - the label with the highest score is then chosen as the label of the feature vector.
@@ -33,11 +34,13 @@ A particular training-testing division is chosen (37 images training, 13 images 
 But, the algorithm used in this pipeline further transforms this vector of scores (called a *confidence vector* using extra information extracted from the training vectors. It then predicts the label of the vector to be the one with the maximum score. The exact algorithm for this is explained below:
 
 1. The extraction of extra information from the training vectors begins by finding the 4 nearest neighbours for each of the training vectors (the first nearest neighbour would be the training vector itself, which is part of the set of reference points for the algorithm). 
-2. These 4 nearest neighbours are used to determine the expected labels for the training vectors (using the naive algorithm described above). These expected labels are used with the real labels to create a confusion matrix for the training vectors.
-3. This confusion matrix is then transformed into a conditional probability matrix where the (i,j) entry of the matrix denotes the probability that the actual label (GroundTruth value) is 'i', given that the kNN search predicted the label 'j'.
+2. These 4 nearest neighbours are used to determine the expected labels for the training vectors (using the naive algorithm described above). These expected labels are used with the real labels to create a confusion matrix for the training vectors. These are what the */data/Predictions_n/Performance_Evaluation/intermediateConfusionMatrix.csv* files hold.
+3. This confusion matrix is then transformed into a conditional probability matrix where the (i,j) entry of the matrix denotes the probability that the actual label (GroundTruth value) is 'i', given that the kNN search predicted the label 'j'. These are what the */data/Predictions_n/Performance_Evaluation/condProb.csv* files hold.
 4. The kNN search is then run for the testing vectors and confidence vectors are obtained.
 5. These confidence vectors are then transformed using the conditional probability matrix. That is, the ith entry of the confidence vector now becomes the dot product of the ith row of the conditional probability matrix with the original confidence vector.
 6. Now, the index with the maximum value in the transformed confidence vector is assigned as its label.
 
 ## 4. eval (Quantify Pipeline Performance)
-This script *evaluations* takes the predicted images and compares them pixel-wise with the original labeled (ground truth) images to calculate the accuracy (confusion matrix, precision, recall and F1) of the pipeline. Another approach is to make the comparison superpixel-wise, and there is a separate script called *evaluations_superpixel* for doing this. The accuracy is much lower for the pixel-wise evaluations, as is expected.
+This script *evaluations* takes the predicted images and compares them pixel-wise with the original labeled (ground truth) images to calculate the accuracy (confusion matrix, precision, recall and F1) of the pipeline. 
+
+Another approach is to make the comparison superpixel-wise, and there is a separate script called *evaluations_superpixel* for doing this. As would be expected, the reported accuracy is much higher for this superpixel-wise comparison.
