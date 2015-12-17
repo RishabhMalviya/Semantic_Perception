@@ -47,9 +47,9 @@ std::size_t inverseDistancePredictor_Training(arma::vec Distances, arma::Col<std
       denominator += 1.0/Distances(i);
     }
   for(int i=1; i<Distances.n_rows; ++i){
-      probabilities(Results(i)) += 0.7*1.0/(Distances(i)*denominator);
+      probabilities(Results(i)) += 0.5*1.0/(Distances(i)*denominator);
     }
-  probabilities(Results(0)) += 0.3;
+  probabilities(Results(0)) += 0.5;
 
   return maxValueIndex(probabilities);
 }
@@ -178,7 +178,7 @@ int main(int argc, char** argv){
         //Search!
           arma::Mat<std::size_t> Results;
           arma::mat Distances;
-          kNN.Search(2,Results,Distances);
+          kNN.Search(5,Results,Distances);
           mlpack::data::Save("../pre_referencing.csv",Results,true);
         //Make distances easier to work with
           arma::mat divider(Distances.n_rows,Distances.n_cols); divider.fill(100.0);
