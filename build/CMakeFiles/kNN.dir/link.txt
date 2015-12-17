@@ -1,0 +1,1 @@
+/usr/bin/c++    -Wall -std=gnu++0x -g    CMakeFiles/kNN.dir/src/kNN.cpp.o  -o kNN -rdynamic libVigraImpex.a /usr/local/lib/libmlpack.so -llapack -lf77blas -latlas -lf77blas -latlas -Wl,-rpath,/usr/local/lib 

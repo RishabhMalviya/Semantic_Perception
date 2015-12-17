@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/segmentation.dir/src/segmentation.cpp.o  -o segmentation -rdynamic libVigraImpex.a 
