@@ -280,16 +280,15 @@ int main(int argc, char** argv){
         }
 
   arma::mat confusionMatrix(11,11); confusionMatrix.fill(0.0);
-
+  double totalSuperpixelCount = 0.0;
     for(int testImageIndex=0; testImageIndex<13; ++testImageIndex)
     {
-      //Import GroundTruth IMAGES
-        std::stringstream GTImage_file;
-        GTImage_file << "../data/ml_task/labeled_gif/" << testingImages[testImageIndex] << "_left.gif";
-        ImageImportInfo GTImageInfo(GTImage_file.str().c_str());
-        MultiArray<2, unsigned int> GTImage(GTImageInfo.shape());
-        importImage(GTImageInfo, GTImage);
-
+      //Import GroundTruth Vectors
+        std::stringstream GTV_file;
+        GTV_file << "../data/GT_vectors/" << testingImages[testImageIndex] << "_GT.csv";
+        arma::mat GTV;
+        mlpack::data::Load(GTV_file.str().c_str(),GTV,true); //!!Row Vector!!
+        
       //Import Prediction Vectors
         std::stringstream PV_file;
         PV_file << "../data/Predictions_" << argv[1] << "/FinalPredictionVectors/" << testingImages[testImageIndex] << "_predictionVector.csv";
@@ -309,10 +308,9 @@ int main(int argc, char** argv){
         mlpack::data::Load(SLICImage_file.str().c_str(),SLICImage,true);
 
       //Begin Calculating Confusion Matrix
-        for(int x=0; x<GTImage.width(); ++x){
-            for(int y=0; y<GTImage.height(); ++y){
-                confusionMatrix(PV(0,determineIndex(SLICImage(y,x),SLICLabels.row(0))),GTImage[Shape2(x,y)]) += 1.0;
-              }
+        totalSuperpixelCount += GTV.n_cols;
+        for(unsigned int x=0; x<GTV.n_cols; ++x){
+            confusionMatrix(PV(0,x),GTV(0,x)) += 1.0;
           }
       }
     std::stringstream finalConfMat_file;;
@@ -325,7 +323,7 @@ int main(int argc, char** argv){
           for(unsigned int i=0; i<confusionMatrix.n_cols; ++i){
               accuracy += confusionMatrix(i,i);
             }
-          accuracy = (accuracy*100)/(640*512*13);
+          accuracy = (accuracy*100)/(totalSuperpixelCount);
           std::cout << "Accuracy: " << accuracy << "%" << std::endl;
 
         //Precision

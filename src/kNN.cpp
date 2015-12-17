@@ -397,7 +397,7 @@ int main(int argc, char** argv){
             }
         //Export Confusion Matrix
           std::stringstream confMat_file;
-          confMat_file << "../data/Predictions_" << argv[1] << "Performance_Evaluation/intermediateConfusionMatrix.csv";
+          confMat_file << "../data/Predictions_" << argv[1] << "/Performance_Evaluation/intermediateConfusionMatrix.csv";
           mlpack::data::Save(confMat_file.str().c_str(),confusionMatrix,true);
 
 
@@ -420,7 +420,7 @@ int main(int argc, char** argv){
                 }
             }
           std::stringstream condProb_file;
-          condProb_file << "../data/Predictions_" << argv[1] << "Performance_Evaluation/condProb.csv";
+          condProb_file << "../data/Predictions_" << argv[1] << "/Performance_Evaluation/condProb.csv";
           mlpack::data::Save(condProb_file.str().c_str(),condProb,true);
 
         //For each test image, calculate prediction vectors
@@ -449,6 +449,7 @@ int main(int argc, char** argv){
                     for(int i=0; i<11; ++i){
                         finalConfidenceVectors(i,superpixel) = dot(confidenceVector_prediction,condProb.row(i).t());
                       }
+                    //finalConfidenceVectors.col(superpixel) = confidenceVector_prediction;
                   }
                 std::stringstream confidenceVectors_view;
                 confidenceVectors_view << "../data/Predictions_" << argv[1] << "/FinalConfidenceVectors/" << testingImages[testImageNumber] << "_confVects.csv";

@@ -60,3 +60,11 @@ target_link_libraries(eval
     ${LAPACK_LIBRARIES}
     ${BLAS_LIBRARIES}
 )
+
+add_executable(eval_superpixel src/eval_superpixel.cpp)
+target_link_libraries(eval_superpixel
+    VigraImpex
+    ${MLPack}
+    ${LAPACK_LIBRARIES}
+    ${BLAS_LIBRARIES}
+)
