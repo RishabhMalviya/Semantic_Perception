@@ -46,10 +46,12 @@ std::size_t inverseDistancePredictor_Training(arma::vec Distances, arma::Col<std
   for(int i=1; i<Distances.n_rows; ++i){
       denominator += 1.0/Distances(i);
     }
+
+  const double self_weighting = 0.3;
   for(int i=1; i<Distances.n_rows; ++i){
-      probabilities(Results(i)) += 0.5*1.0/(Distances(i)*denominator);
+      probabilities(Results(i)) += (1-self_weighting)*1.0/(Distances(i)*denominator);
     }
-  probabilities(Results(0)) += 0.5;
+  probabilities(Results(0)) += self_weighting;
 
   return maxValueIndex(probabilities);
 }
@@ -179,7 +181,6 @@ int main(int argc, char** argv){
           arma::Mat<std::size_t> Results;
           arma::mat Distances;
           kNN.Search(5,Results,Distances);
-          mlpack::data::Save("../pre_referencing.csv",Results,true);
         //Make distances easier to work with
           arma::mat divider(Distances.n_rows,Distances.n_cols); divider.fill(100.0);
           Distances = Distances/divider;
@@ -189,7 +190,6 @@ int main(int argc, char** argv){
                   Results(y,x) = trainingGTVs(Results(y,x));
                 }
             }
-          mlpack::data::Save("../post_referencing.csv",Results,true);
         //Determine final predictions for query points using all neighbours (weighted by inverse distances)
           for(int i=0; i<Results.n_cols; ++i){
               Results(0,i) = inverseDistancePredictor_Training(Distances.col(i),Results.col(i),11);
@@ -204,7 +204,7 @@ int main(int argc, char** argv){
         //Export Confusion Matrix
           std::stringstream confMat_file;
           confMat_file << "../data/Predictions_" << testNumber << "/intermediateConfusionMatrix.csv";
-          //mlpack::data::Save(confMat_file.str().c_str(),confusionMatrix,true);
+          mlpack::data::Save(confMat_file.str().c_str(),confusionMatrix,true);
 
 
       //Predict labels for each test case (5 neighbours based confidence vector)
@@ -218,13 +218,16 @@ int main(int argc, char** argv){
            */
           for(int x=0; x<condProb.n_cols; ++x){
               for(int y=0; y<condProb.n_rows; ++y){
-                  if(colSum(confusionMatrix.col(x))==0) condProb(y,x) = 0;
+                  if(colSum(confusionMatrix.col(x))==0){
+                      if(x==y) condProb(x,y)=1;
+                      else condProb(y,x) = 0;
+                    }
                   else condProb(y,x) = confusionMatrix(y,x)/colSum(confusionMatrix.col(x));
                 }
             }
           std::stringstream condProb_file;
           condProb_file << "../data/Predictions_" << testNumber << "/condProb.csv";
-          //mlpack::data::Save(condProb_file.str().c_str(),condProb,true);
+          mlpack::data::Save(condProb_file.str().c_str(),condProb,true);
 
         //For each test image, calculate prediction vectors
           for(int testImageNumber=0; testImageNumber<13; ++testImageNumber){
@@ -232,8 +235,9 @@ int main(int argc, char** argv){
               //Search!
                 arma::Mat<std::size_t> Results_;
                 arma::mat Distances_;
-                kNN.Search(5,Results_,Distances_);
+                kNN.Search(1,Results_,Distances_);
                 std::cout << "Completed search for test image: " << testImageNumber+1 << std::endl;
+                std::cout << "Number of superpixels in image: " << Results_.n_cols << std::endl << std::endl;
               //Make distances easier to work with
                 arma::mat divider(Distances_.n_rows,Distances_.n_cols); divider.fill(100.0);
                 Distances_ = Distances_/divider;
@@ -243,17 +247,25 @@ int main(int argc, char** argv){
                         Results_(y,x) = trainingGTVs(Results_(y,x));
                       }
                   }
+                mlpack::data::Save("../intermediate_results.csv",Results_,true);
               //Determine Confidence Vectors for Each superpixel
-                arma::mat finalConfidenceVectors(Results_.n_cols,11);
+                arma::mat finalConfidenceVectors(11,Results_.n_cols);
                 for(int superpixel=0; superpixel<Results_.n_cols; ++superpixel){
-                    arma::vec confidenceVector_prediction = inverseDistancePredictor_Testing(Distances_.col(superpixel),Results_.col(superpixel),11);
+                    arma::vec confidenceVector_prediction; confidenceVector_prediction.fill(0.0);
+                    confidenceVector_prediction = inverseDistancePredictor_Testing(Distances_.col(superpixel),Results_.col(superpixel),11);
                     for(int i=0; i<11; ++i){
-                        finalConfidenceVectors(superpixel,i) = dot(confidenceVector_prediction,condProb.row(i).t());
+                        finalConfidenceVectors(i,superpixel) = dot(confidenceVector_prediction,condProb.row(i).t());
                       }
+                    finalConfidenceVectors.col(superpixel) = confidenceVector_prediction;
                   }
-                std::stringstream condProb_file;
+                std::stringstream confidenceVectors_view;
+                confidenceVectors_view << "../" << testingImages[testImageNumber] << "_confVects.csv";
+                mlpack::data::Save(confidenceVectors_view.str().c_str(),finalConfidenceVectors,true);
+/*                std::stringstream condProb_file;
                 condProb_file << "../data/Predictions_" << testNumber << "/FinalConfidenceVectors/" << testingImages[testImageNumber] << "_confVect.csv";
-                //mlpack::data::Save(condProb_file.str().c_str(),condProb,true);
+                mlpack::data::Save(condProb_file.str().c_str(),condProb,true);
+*/
+/*
               //Determine final predictions from the maximums in the final confidence vectors
                 arma::Mat<std::size_t> finalPredictions(1,Results_.n_cols);
                 for(int superpixel=0; superpixel<Results_.n_cols; ++superpixel){
@@ -262,6 +274,7 @@ int main(int argc, char** argv){
                 std::stringstream predictionVector_file;
                 predictionVector_file << "../data/Predictions_" << testNumber << "/FinalPredictionVectors/" << testingImages[testImageNumber] << "_predictionVector.csv";
                 //mlpack::data::Save(predictionVector_file.str().c_str(),finalPredictions,true);
+*/
             }
 
 
