@@ -1,1 +1,0 @@
-/usr/bin/c++    -Wall -std=gnu++0x -g    CMakeFiles/GT_SLICLabels_extraction.dir/src/GT_SLICLabels_extraction.cpp.o  -o GT_SLICLabels_extraction -rdynamic libVigraImpex.a /usr/local/lib/libmlpack.so -Wl,-rpath,/usr/local/lib 
