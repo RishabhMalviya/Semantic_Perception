@@ -25,12 +25,11 @@ double rowSum(arma::rowvec input){
 }
 
 std::size_t maxValueIndex(arma::vec input){
-  double current_highest=0, new_contender=0;
+  double current_highest=0;
   std::size_t maxValueIndex_=0;
   for(std::size_t i=0; i<input.n_rows; ++i){
-      new_contender = input(i);
-      if(new_contender>current_highest){
-          current_highest=new_contender;
+      if(input(i)>current_highest){
+          current_highest = input(i);
           maxValueIndex_ = i;
         }
     }

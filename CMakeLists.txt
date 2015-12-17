@@ -50,3 +50,10 @@ target_link_libraries(kNN
     ${BLAS_LIBRARIES}
 )
 
+add_executable(eval src/eval.cpp)
+target_link_libraries(eval
+    VigraImpex
+    ${MLPack}
+    ${LAPACK_LIBRARIES}
+    ${BLAS_LIBRARIES}
+)
