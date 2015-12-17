@@ -130,7 +130,7 @@ int main(int argc, char ** argv)
 
       /*FEATURE VECTORS*/
         arma::mat featureVectors(17,1), FV_full(17,superpixelCount);
-        for(int superpixelIndex=0; superpixelIndex<superpixelCount; superpixelIndex++){
+        for(unsigned int superpixelIndex=0; superpixelIndex<superpixelCount; superpixelIndex++){
           if(RGBMeans(superpixelIndex+1).blue()>0.00001){
               arma::vec tempFV(17);
               tempFV(0) = RGBMeans(superpixelIndex+1).red();

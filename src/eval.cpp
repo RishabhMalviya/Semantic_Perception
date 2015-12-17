@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cmath>
 #include <string>
+#include <stdlib.h>
+#include <initializer_list>
 
 #include <mlpack/core.hpp>
 #include <mlpack/methods/neighbor_search/neighbor_search.hpp>
@@ -15,7 +17,7 @@ using namespace vigra;
 
 std::size_t determineIndex(std::size_t value, arma::Row<std::size_t> rowVector){
     std::size_t index=0;
-    for(int i=0; i<rowVector.n_cols; i++){
+    for(unsigned int i=0; i<rowVector.n_cols; i++){
             if(rowVector(i)==value){
                     index=i;
                 }
@@ -24,65 +26,258 @@ std::size_t determineIndex(std::size_t value, arma::Row<std::size_t> rowVector){
 }
 
 
-static const char testNumber[] = "4";
-
 int main(int argc, char** argv){
     //Enumerate Training and Test Image Numbers
-  std::string trainingImages[37] = {
-                                                           "4280",
-                                                           "4720",
-                                                           "4740",
-                                                           "4780",
-                                                           "5000",
-                                                           "5220",
-                                                           "5440",
-                                                           "5600",
-                                                           "5640",
-                                                           "5660",
-                                                           "5900",
-                                                           "6100",
-                                                           "6120",
-                                                           "1160",
-                                                           "1220",
-                                                           "1320",
-                                                           "1440",
-                                                           "1480",
-                                                           "1580",
-                                                           "1600",
-                                                           "1660",
-                                                           "1720",
-                                                           "1940",
-                                                           "2280",
-                                                           "2300",
-                                                           "2340",
-                                                           "2420",
-                                                           "2580",
-                                                           "2600",
-                                                           "2860",
-                                                           "3140",
-                                                           "3220",
-                                                           "3700",
-                                                           "3920",
-                                                           "4100",
-                                                           "4200",
-                                                           "4260"
-                                                          };
+      static const int testNumber = std::atoi(argv[1]);
+      std::string trainingImages[37];
+      std::string testingImages[13];
 
-  std::string testingImages[13] = {
-                                                           "0080",
-                                                           "0160",
-                                                           "0180",
-                                                           "0200",
-                                                           "0580",
-                                                           "0700",
-                                                           "0760",
-                                                           "0800",
-                                                           "0820",
-                                                           "1020",
-                                                           "1060",
-                                                           "1080",
-                                                           "1100",
-                                                     };
+      switch(testNumber){
+          case 1 :
+          {
+              std::string trainingImages_[37] =                {"0080",
+                                                                 "0160",
+                                                                 "0180",
+                                                                 "0200",
+                                                                 "0580",
+                                                                 "0700",
+                                                                 "0760",
+                                                                 "0800",
+                                                                 "0820",
+                                                                 "1020",
+                                                                 "1060",
+                                                                 "1080",
+                                                                 "1100",
+                                                                 "1160",
+                                                                 "1220",
+                                                                 "1320",
+                                                                 "1440",
+                                                                 "1480",
+                                                                 "1580",
+                                                                 "1600",
+                                                                 "1660",
+                                                                 "1720",
+                                                                 "1940",
+                                                                 "2280",
+                                                                 "2300",
+                                                                 "2340",
+                                                                 "2420",
+                                                                 "2580",
+                                                                 "2600",
+                                                                 "2860",
+                                                                 "3140",
+                                                                 "3220",
+                                                                 "3700",
+                                                                 "3920",
+                                                                 "4100",
+                                                                 "4200",
+                                                                 "4260"};
+             for(int i=0; i<37; ++i) trainingImages[i] = trainingImages_[i];
+
+	     std::string testingImages_[13] =		       {"4280",
+								"4720",
+								"4740",
+								"4780",
+								"5000",
+								"5220",
+								"5440",
+								"5600",
+								"5640",
+								"5660",
+								"5900",
+								"6100",
+								"6120"};
+	      for(int i=0; i<13; ++i) testingImages[i] = testingImages_[i];
+
+	      break;
+	    }
+	  case 2 :
+	  {
+	      std::string trainingImages_[37] = {
+								     "0080",
+								     "0160",
+								     "0180",
+								     "0200",
+								     "0580",
+								     "0700",
+								     "0760",
+								     "0800",
+								     "0820",
+								     "1020",
+								     "1060",
+								     "1080",
+								     "1100",
+								     "1160",
+								     "1220",
+								     "1320",
+								     "1440",
+								     "1480",
+								     "1580",
+								     "1600",
+								     "1660",
+								     "1720",
+								     "1940",
+								     "2280",
+								     "4280",
+								     "4720",
+								     "4740",
+								     "4780",
+								     "5000",
+								     "5220",
+								     "5440",
+								     "5600",
+								     "5640",
+								     "5660",
+								     "5900",
+								     "6100",
+								     "6120"
+								    };
+	      for(int i=0; i<37; ++i) trainingImages[i] = trainingImages_[i];
+
+              std::string testingImages_[13] = {
+                                                                     "2300",
+                                                                     "2340",
+                                                                     "2420",
+                                                                     "2580",
+                                                                     "2600",
+                                                                     "2860",
+                                                                     "3140",
+                                                                     "3220",
+                                                                     "3700",
+                                                                     "3920",
+                                                                     "4100",
+                                                                     "4200",
+                                                                     "4260"
+                                                               };
+              for(int i=0; i<13; ++i) testingImages[i] = testingImages_[i];
+
+              break;
+            }
+          case 3 :
+          {
+              std::string trainingImages_[37] = {
+                                                                     "0080",
+                                                                     "0160",
+                                                                     "0180",
+                                                                     "0200",
+                                                                     "0580",
+                                                                     "0700",
+                                                                     "0760",
+                                                                     "0800",
+                                                                     "0820",
+                                                                     "1020",
+                                                                     "1060",
+                                                                     "4280",
+                                                                     "4720",
+                                                                     "4740",
+                                                                     "4780",
+                                                                     "5000",
+                                                                     "5220",
+                                                                     "5440",
+                                                                     "5600",
+                                                                     "5640",
+                                                                     "5660",
+                                                                     "5900",
+                                                                     "6100",
+                                                                     "6120",
+                                                                     "2300",
+                                                                     "2340",
+                                                                     "2420",
+                                                                     "2580",
+                                                                     "2600",
+                                                                     "2860",
+                                                                     "3140",
+                                                                     "3220",
+                                                                     "3700",
+                                                                     "3920",
+                                                                     "4100",
+                                                                     "4200",
+                                                                     "4260"
+                                                                    };
+              for(int i=0; i<37; ++i) trainingImages[i] = trainingImages_[i];
+
+              std::string testingImages_[13] = {
+                                                                     "1080",
+                                                                     "1100",
+                                                                     "1160",
+                                                                     "1220",
+                                                                     "1320",
+                                                                     "1440",
+                                                                     "1480",
+                                                                     "1580",
+                                                                     "1600",
+                                                                     "1660",
+                                                                     "1720",
+                                                                     "1940",
+                                                                     "2280",
+                                                               };
+              for(int i=0; i<13; ++i) testingImages[i] = testingImages_[i];
+
+              break;
+            }
+          case 4 :
+          {
+              std::string trainingImages_[37] = {
+                                                                     "4280",
+                                                                     "4720",
+                                                                     "4740",
+                                                                     "4780",
+                                                                     "5000",
+                                                                     "5220",
+                                                                     "5440",
+                                                                     "5600",
+                                                                     "5640",
+                                                                     "5660",
+                                                                     "5900",
+                                                                     "6100",
+                                                                     "6120",
+                                                                     "1160",
+                                                                     "1220",
+                                                                     "1320",
+                                                                     "1440",
+                                                                     "1480",
+                                                                     "1580",
+                                                                     "1600",
+                                                                     "1660",
+                                                                     "1720",
+                                                                     "1940",
+                                                                     "2280",
+                                                                     "2300",
+                                                                     "2340",
+                                                                     "2420",
+                                                                     "2580",
+                                                                     "2600",
+                                                                     "2860",
+                                                                     "3140",
+                                                                     "3220",
+                                                                     "3700",
+                                                                     "3920",
+                                                                     "4100",
+                                                                     "4200",
+                                                                     "4260"
+                                                                    };
+              for(int i=0; i<37; ++i) trainingImages[i] = trainingImages_[i];
+
+              std::string testingImages_[13] = {
+                                                                     "0080",
+                                                                     "0160",
+                                                                     "0180",
+                                                                     "0200",
+                                                                     "0580",
+                                                                     "0700",
+                                                                     "0760",
+                                                                     "0800",
+                                                                     "0820",
+                                                                     "1020",
+                                                                     "1060",
+                                                                     "1080",
+                                                                     "1100",
+                                                                   };
+              for(int i=0; i<13; ++i) testingImages[i] = testingImages_[i];
+
+              break;
+            }
+        }
 
   arma::mat confusionMatrix(11,11); confusionMatrix.fill(0.0);
 
@@ -97,10 +292,9 @@ int main(int argc, char** argv){
 
       //Import Prediction Vectors
         std::stringstream PV_file;
-        PV_file << "../data/Predictions_" << testNumber << "/FinalPredictionVectors/" << testingImages[testImageIndex] << "_predictionVector.csv";
+        PV_file << "../data/Predictions_" << argv[1] << "/FinalPredictionVectors/" << testingImages[testImageIndex] << "_predictionVector.csv";
         arma::Mat<std::size_t> PV;
         mlpack::data::Load(PV_file.str().c_str(),PV,true); //!!Row Vector!!
-        mlpack::data::Save("../test.csv",PV,true);
 
       //Import SLIC label vectors
         std::stringstream SLICLabels_file;
@@ -120,28 +314,62 @@ int main(int argc, char** argv){
                 confusionMatrix(PV(0,determineIndex(SLICImage(y,x),SLICLabels.row(0))),GTImage[Shape2(x,y)]) += 1.0;
               }
           }
-
+/*
       //Create Prediction Image
-        MultiArray<2,float> predicted(GTImageInfo.shape()); predicted.init(0);
+        MultiArray<2,UInt8> predicted(GTImageInfo.shape()); predicted.init(0);
         for(int x=0; x<GTImage.width(); ++x){
                 for(int y=0; y<GTImage.height(); ++y){
-                        predicted[Shape2(x,y)] = (float)PV(0,determineIndex(SLICImage(y,x),SLICLabels.row(0)));
+                        predicted[Shape2(x,y)] = (UInt8)PV(0,determineIndex(SLICImage(y,x),SLICLabels.row(0)));
                     }
             }
-        //std::stringstream predicted_file;
-        //predicted_file << "../data/Prediction_" << testNumber << "/PredictedImages/" << testingImages[testImageIndex] << "_predicted.gif";
-        exportImage(predicted, ImageExportInfo("output.gif"));
+        std::stringstream predicted_file;
+        predicted_file << "../data/Prediction_" << argv[1] << "/PredictedImages/" << testingImages[testImageIndex] << "_predicted.gif";
+        exportImage(predicted, ImageExportInfo(predicted_file.str().c_str()));*/
       }
     std::stringstream finalConfMat_file;;
-    finalConfMat_file << "../data/Predictions_" << testNumber << "/Performance_Evaluation/confusionMatrix.csv";
+    finalConfMat_file << "../data/Predictions_" << argv[1] << "/Performance_Evaluation/confusionMatrix.csv";
     mlpack::data::Save(finalConfMat_file.str().c_str(),confusionMatrix,true);
 
-    //Calculate other metrics (Precision, Recall, F1)
-        double correct = 0.0;
-        for(int i=0; i<confusionMatrix.n_cols; ++i){
-            correct += confusionMatrix(i,i);
-          }
-        std::cout << "Accuracy: " << correct/(640*512) << "%" << std::endl;
+    //Calculate other metrics (Accuracy, Precision, Recall, F1)
+        //Accuracy
+          double accuracy = 0.0;
+          for(unsigned int i=0; i<confusionMatrix.n_cols; ++i){
+              accuracy += confusionMatrix(i,i);
+            }
+          accuracy = (accuracy*100)/(640*512);
+          std::cout << "Accuracy: " << accuracy << "%" << std::endl;
+/*
+        //Precision
+          arma::mat Precision(0,confusionMatrix.n_cols); Precision.fill(0.0);
+          for(unsigned int i=0; i<Precision.n_cols; ++i){
+              for(unsigned int j=0; j<confusionMatrix.n_cols; ++j){
+                  Precision(0,i) += confusionMatrix(i,j);
+                }
+            }
+          std::stringstream precision_file;
+          precision_file << "../data/Predictions_" << argv[1] << "/Performance_Evaluation/Precision.csv";
+          mlpack::data::Save(precision_file.str().c_str(),Precision,true);
+
+        //Recall
+          arma::mat Recall(0,confusionMatrix.n_cols); Recall.fill(0.0);
+          for(unsigned int i=0; i<Recall.n_cols; ++i){
+              for(unsigned int j=0; j<confusionMatrix.n_cols; ++j){
+                  Recall(0,i) += confusionMatrix(j,i);
+                }
+            }
+          std::stringstream recall_file;
+          recall_file << "../data/Predictions_" << argv[1] << "/Performance_Evaluation/Recall.csv";
+          mlpack::data::Save(recall_file.str().c_str(),Recall,true);
+
+        //F1 Score
+          arma::mat F1(0,confusionMatrix.n_cols); F1.fill(0.0);
+          for(unsigned int i=0; i<F1.n_cols; ++i){
+              F1(0,i) = (2*Precision(0,i)*Recall(0,i)/(Precision(0,i)+Recall(0,i)));
+            }
+          std::stringstream F1_file;
+          F1_file << "../data/Predictions_" << argv[1] << "/Performance_Evaluation/F1.csv";
+          mlpack::data::Save(F1_file.str().c_str(),F1,true);
+*/
 
     return 0;
 }
