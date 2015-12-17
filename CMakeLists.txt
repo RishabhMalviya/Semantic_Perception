@@ -15,6 +15,7 @@ find_library(MLPack NAMES libmlpack.so PATHS /usr/local/lib)
 
 #LibXml2
 find_package(LibXml2 REQUIRED)
+include_directories(${LIBXML2_INCLUDE_DIR})
 
 #Armadillo
 find_package(Armadillo REQUIRED)

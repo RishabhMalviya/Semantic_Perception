@@ -47,8 +47,9 @@ std::size_t inverseDistancePredictor_Training(arma::vec Distances, arma::Col<std
       denominator += 1.0/Distances(i);
     }
   for(int i=1; i<Distances.n_rows; ++i){
-      probabilities(Results(i)) += 1.0/(Distances(i)*denominator);
+      probabilities(Results(i)) += 0.7*1.0/(Distances(i)*denominator);
     }
+  probabilities(Results(0)) += 0.3;
 
   return maxValueIndex(probabilities);
 }
@@ -160,6 +161,8 @@ int main(int argc, char** argv){
         for(int FinalGTVIndex=0;FinalGTVIndex<trainingGTVs.n_rows;++FinalGTVIndex){
             trainingGTVs(FinalGTVIndex) = (std::size_t)trainingGTVs_float(FinalGTVIndex);
           }
+        arma::Row<std::size_t> trainingGTVs_transpose = trainingGTVs.t();
+        mlpack::data::Save("../trainingGTvs.csv",trainingGTVs_transpose,true);
 
     //Import Testing FVs
         arma::mat testingFVs[13];
@@ -175,7 +178,8 @@ int main(int argc, char** argv){
         //Search!
           arma::Mat<std::size_t> Results;
           arma::mat Distances;
-          kNN.Search(5,Results,Distances);
+          kNN.Search(2,Results,Distances);
+          mlpack::data::Save("../pre_referencing.csv",Results,true);
         //Make distances easier to work with
           arma::mat divider(Distances.n_rows,Distances.n_cols); divider.fill(100.0);
           Distances = Distances/divider;
@@ -185,10 +189,13 @@ int main(int argc, char** argv){
                   Results(y,x) = trainingGTVs(Results(y,x));
                 }
             }
+          mlpack::data::Save("../post_referencing.csv",Results,true);
         //Determine final predictions for query points using all neighbours (weighted by inverse distances)
           for(int i=0; i<Results.n_cols; ++i){
               Results(0,i) = inverseDistancePredictor_Training(Distances.col(i),Results.col(i),11);
             }
+          arma::Row<std::size_t> trainingResults = Results.row(0);
+          mlpack::data::Save("../training_prediction.csv",trainingResults,true);
         //Create confusion matrix
           arma::mat confusionMatrix(11,11); confusionMatrix.fill(0.0);
           for(int i=0; i<Results.n_cols; ++i){
@@ -197,7 +204,7 @@ int main(int argc, char** argv){
         //Export Confusion Matrix
           std::stringstream confMat_file;
           confMat_file << "../data/Predictions_" << testNumber << "/intermediateConfusionMatrix.csv";
-          mlpack::data::Save(confMat_file.str().c_str(),confusionMatrix,true);
+          //mlpack::data::Save(confMat_file.str().c_str(),confusionMatrix,true);
 
 
       //Predict labels for each test case (5 neighbours based confidence vector)
@@ -217,7 +224,7 @@ int main(int argc, char** argv){
             }
           std::stringstream condProb_file;
           condProb_file << "../data/Predictions_" << testNumber << "/condProb.csv";
-          mlpack::data::Save(condProb_file.str().c_str(),condProb,true);
+          //mlpack::data::Save(condProb_file.str().c_str(),condProb,true);
 
         //For each test image, calculate prediction vectors
           for(int testImageNumber=0; testImageNumber<13; ++testImageNumber){
@@ -246,7 +253,7 @@ int main(int argc, char** argv){
                   }
                 std::stringstream condProb_file;
                 condProb_file << "../data/Predictions_" << testNumber << "/FinalConfidenceVectors/" << testingImages[testImageNumber] << "_confVect.csv";
-                mlpack::data::Save(condProb_file.str().c_str(),condProb,true);
+                //mlpack::data::Save(condProb_file.str().c_str(),condProb,true);
               //Determine final predictions from the maximums in the final confidence vectors
                 arma::Mat<std::size_t> finalPredictions(1,Results_.n_cols);
                 for(int superpixel=0; superpixel<Results_.n_cols; ++superpixel){
@@ -254,7 +261,7 @@ int main(int argc, char** argv){
                   }
                 std::stringstream predictionVector_file;
                 predictionVector_file << "../data/Predictions_" << testNumber << "/FinalPredictionVectors/" << testingImages[testImageNumber] << "_predictionVector.csv";
-                mlpack::data::Save(predictionVector_file.str().c_str(),finalPredictions,true);
+                //mlpack::data::Save(predictionVector_file.str().c_str(),finalPredictions,true);
             }
 
 
