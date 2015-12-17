@@ -44,6 +44,6 @@ NOTE: To run the algorithm without the added modifications, comment the for loop
 ## 4. eval (Quantify Pipeline Performance)
 This script *evaluations* takes the predicted images and compares them pixel-wise with the original labeled (ground truth) images to calculate the accuracy (confusion matrix, precision, recall and F1) of the pipeline. 
 
-Another approach is to make the comparison superpixel-wise, and there is a separate script called *evaluations_superpixel* for doing this. As would be expected, the reported accuracy is much higher for this superpixel-wise comparison.
+Another approach is to make the comparison superpixel-wise, and there is a separate script called *evaluations_superpixel* for doing this. As would be expected, the reported accuracy is much higher for this superpixel-wise comparison; but it is not really a correct representation of the accuracy of the pipeline, as the final task is to label the pixels themselves.
 
-Unfortunately, using the modified kNN search did not make much difference to the final result. It didn't even consistently increase/decrease the accuracy - sometimes it boosted the accuracy and sometimes it made it drop, but by miniscule amounts in both cases. 
+There was a minute increase in 'pixel-wise' performance thanks to the introduction of the explained modification in the kNN search algorithm. 
