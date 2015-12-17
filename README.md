@@ -25,8 +25,6 @@ This file extracts the ground truth labels (the desired outputs) for each featur
 
 
 ## 3. kNN (k - Nearest Neighbours to Assign Labels to Feature Vectors)
-NOTE: The number of nearest neighbours to consider in the various parts of the algorithm can be varied, though in the following discussion we assume fixed numerical values.
-
 A particular training-testing division is chosen (37 images training, 13 images testing) and the feature vectors of the superpixels in the training images are used as reference points for the k-NN algorithm. The 5 nearest neighbors of the testing feature vectors are used to determine what their labels should be. One way to proceed is this:
 
 * The label of the feature vector is predicted by assigning scores to all of the possible labels of the 5 nearest neighbours against the inverse distances from those neighbours - the label with the highest score is then chosen as the label of the feature vector.
@@ -40,7 +38,12 @@ But, the algorithm used in this pipeline further transforms this vector of score
 5. These confidence vectors are then transformed using the conditional probability matrix. That is, the ith entry of the confidence vector now becomes the dot product of the ith row of the conditional probability matrix with the original confidence vector.
 6. Now, the index with the maximum value in the transformed confidence vector is assigned as its label.
 
+NOTE: The number of nearest neighbours to consider in the various parts of the algorithm can be varied, though in the preceding discussion we assumed fixed numerical values.
+NOTE: To run the algorithm without the added modifications, comment the for loop starting at line 449 of the *kNN.cpp* file and uncomment the line just after it - line number 452.
+
 ## 4. eval (Quantify Pipeline Performance)
 This script *evaluations* takes the predicted images and compares them pixel-wise with the original labeled (ground truth) images to calculate the accuracy (confusion matrix, precision, recall and F1) of the pipeline. 
 
 Another approach is to make the comparison superpixel-wise, and there is a separate script called *evaluations_superpixel* for doing this. As would be expected, the reported accuracy is much higher for this superpixel-wise comparison.
+
+Unfortunately, using the modified kNN search did not make much difference to the final result. It didn't even consistently increase/decrease the accuracy - sometimes it boosted the accuracy and sometimes it made it drop, but by miniscule amounts in both cases. 
