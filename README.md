@@ -9,7 +9,7 @@ Semantic Perception internship assignment for CMU 2016 summer internships
 You'll need to have the libraries **mlpack** and **Vigra** installed on your system: 
 
 1. To install Vigra, follow the instructions given [Vigra installation instructions](http://ukoethe.github.io/vigra/doc-release/vigra/Installation.html) and ensure that `make install` executes properly.
-2. To install mlpack, follow the instructions given [mlpack installation instructions](http://www.mlpack.org/doxygen.php?doc=build.html). Again, ensure that make install executed properly.
+2. To install mlpack, follow the instructions given [mlpack installation instructions](http://www.mlpack.org/doxygen.php?doc=build.html). Again, ensure that `make install` executed properly.
 
 
 ## Notes
