@@ -1,3 +1,6 @@
 /build/
 /devel/
 *~
+/Write-Up/*.png
+/Write-Up/*.odt
+
