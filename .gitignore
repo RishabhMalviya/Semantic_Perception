@@ -1,6 +1,6 @@
 /build/
 /devel/
 *~
-/Write-Up/*.png
-/Write-Up/*.odt
+/docs/*.png
+/docs/*.odt
 
